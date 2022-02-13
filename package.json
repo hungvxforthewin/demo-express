@@ -1,0 +1,22 @@
+{
+    "name": "demo-express",
+    "version": "1.0.0",
+    "description": "hello express",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hungvxforthewin/demo-express.git"
+    },
+    "author": "hungvx",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/hungvxforthewin/demo-express/issues"
+    },
+    "homepage": "https://github.com/hungvxforthewin/demo-express#readme",
+    "dependencies": {
+        "express": "^4.17.2"
+    }
+}

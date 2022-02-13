@@ -1,0 +1,7 @@
+node_modules
+uploads
+static
+package-lock.json
+*.log
+.idea
+yarn.lock
