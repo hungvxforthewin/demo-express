@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/router", (req, res) => {
-    res.json("router");
+let middle = (req, res, next) => {
+    console.log("middle 1");
+    next();
+};
+
+router.get("/users", middle, (req, res) => {
+    res.json("list user");
 });
 
 router.get("/user/:id", (req, res) => {
