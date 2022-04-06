@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const router = express.Router();
 const apiRouter = require("./routers/apiRouter");
+const { connectDatabase } = require("./config/connectDB");
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
@@ -10,6 +10,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use(initUser);
+connectDatabase();
 app.use("/api/v1/", apiRouter);
 
 function initUser(req, res, next) {
