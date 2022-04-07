@@ -8,8 +8,11 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
+// config
 app.use(express.json());
+// initial data
 app.use(initUser);
+// connect database
 connectDatabase();
 app.use("/api/v1/", apiRouter);
 
