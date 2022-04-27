@@ -7,7 +7,20 @@ let middle = (req, res, next) => {
 };
 
 router.get("/users", middle, (req, res) => {
-    res.json("list user");
+    const param = req.body.id;
+    console.log("id param: ", param);
+    console.log("body: ", req.body);
+    console.log("params: ", req.params);
+    console.log("users: ", req.user);
+    res.status(777).json("list user");
+});
+
+router.post("/users", middle, (req, res) => {
+    const param = req.body.id;
+    console.log("id param: ", param);
+    console.log("body: ", req.body);
+    console.log("params: ", req.params);
+    console.log("users: ", req.user);
 });
 
 router.get("/user/:id", (req, res) => {

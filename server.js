@@ -3,9 +3,13 @@ const path = require("path");
 const app = express();
 const port = 3000;
 const apiRouter = require("./routers/apiRouter");
+const demoRouter = require("./routers/demoRouting");
 const { connectDatabase } = require("./config/connectDB");
 
 app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+app.get("/hello", (req, res) => {
     res.send("Hello World!");
 });
 
@@ -16,14 +20,20 @@ app.use(express.static("upload")); //http://localhost:3000/keke.txt
 app.use("/imagefake", express.static(path.join(__dirname, "image/check"))); //absolute path of the directory
 
 // initial data
+app.use("/request", initUser);
 app.use(initUser);
 // connect database
 //connectDatabase();
 
+// router
+console.log("start");
 app.use("/api/v1/", apiRouter);
+app.use("/demo-router/", demoRouter);
 
 function initUser(req, res, next) {
+    console.log("an request");
     let userId = req.body.id;
+    console.log(userId);
     if (userId) {
         req.user = {
             id: userId,
