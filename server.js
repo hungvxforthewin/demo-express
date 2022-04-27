@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const port = 3000;
 const apiRouter = require("./routers/apiRouter");
@@ -10,10 +11,15 @@ app.get("/", (req, res) => {
 
 // config
 app.use(express.json());
+app.use("/static", express.static("public")); //http://localhost:3000/static/file/test.txt
+app.use(express.static("upload")); //http://localhost:3000/keke.txt
+app.use("/imagefake", express.static(path.join(__dirname, "image/check"))); //absolute path of the directory
+
 // initial data
 app.use(initUser);
 // connect database
-connectDatabase();
+//connectDatabase();
+
 app.use("/api/v1/", apiRouter);
 
 function initUser(req, res, next) {
