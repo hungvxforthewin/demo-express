@@ -9,6 +9,7 @@ const connect = async () => {
     //     console.log(`Database not connected, error: ${err}`);
     // });
     //console.log(result);
+    console.log("connected mongodb");
 };
 
 module.exports = {

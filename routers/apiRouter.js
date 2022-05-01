@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-let middle = (req, res, next) => {
+const middle = (req, res, next) => {
     console.log("middle 1");
     next();
 };
