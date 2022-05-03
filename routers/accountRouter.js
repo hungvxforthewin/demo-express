@@ -2,6 +2,36 @@ const express = require("express");
 const router = express.Router();
 const AccountModel = require("../models/accountModel");
 
+// RESRful APIs
+
+// GET
+router.get("/", (req, res) => {
+    AccountModel.find({})
+        .then((data) => {
+            return res.json(data);
+        })
+        .catch((err) => {
+            return res.status(500).json("error server");
+        });
+});
+
+// GET :id
+router.get("/:id", (req, res) => {
+    const { id } = req.params;
+    AccountModel.findOne({ _id: id })
+        .then((data) => {
+            if (data) {
+                return res.json(data);
+            } else {
+                return res.status(404).json("not found");
+            }
+        })
+        .catch((err) => {
+            return res.status(500).json("error server");
+        });
+});
+
+// POST
 router.post("/register", (req, res, next) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -37,6 +67,9 @@ router.post("/register", (req, res, next) => {
         });
 });
 
+// PUT
+
+
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -54,7 +87,7 @@ router.post("/login", (req, res) => {
             }
         })
         .catch((err) => {
-            return res.json({ mess: "server error" });
+            return res.status(500).json({ mess: "server error" });
         });
 });
 
