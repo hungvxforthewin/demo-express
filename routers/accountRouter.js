@@ -31,6 +31,22 @@ router.get("/:id", (req, res) => {
         });
 });
 
+// POST id
+router.post("/id", (req, res) => {
+    const { id } = req.body;
+    AccountModel.findOne({ _id: id })
+        .then((data) => {
+            if (data) {
+                return res.json(data);
+            } else {
+                return res.status(404).json("not found");
+            }
+        })
+        .catch((err) => {
+            return res.status(500).json("error server");
+        });
+})
+
 // POST
 router.post("/register", (req, res, next) => {
     const { username, password } = req.body;
@@ -68,7 +84,29 @@ router.post("/register", (req, res, next) => {
 });
 
 // PUT
-
+router.put("/:id", (req, res) => {
+    const id = req.params.id;
+    const newPass = req.body.newPass;
+    // validate param
+    AccountModel.findByIdAndUpdate(id, {
+        password: newPass
+    }, {upsert: true}).then(data => {
+        return res.json("update success");
+    }).catch(err  => {
+        console.log(err);
+        return res.status(500).json("error");
+    })
+})
+// DELETE
+router.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    // validate param
+    AccountModel.findByIdAndDelete(id).then(data => {
+        res.json("delete sucess");
+    }).catch(err => {
+        res.status(500).json("delete error");
+    })
+})
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
