@@ -1,4 +1,5 @@
 const express = require("express");
+const req = require("express/lib/request");
 const router = express.Router();
 const AccountModel = require("../models/accountModel");
 
@@ -30,7 +31,34 @@ router.get("/:id", (req, res) => {
             return res.status(500).json("error server");
         });
 });
+// GET PAGING
+// WHY /list/list
+router.get("/list/list", (req, res) => {
+    const PAGE_SIZE = 1;
+    let PAGE = req.query.page;
+    console.log("page ", PAGE);
 
+    if (PAGE !== 0) {
+        PAGE = parseInt(PAGE);
+        AccountModel.find({})
+            .skip((PAGE - 1) * PAGE_SIZE)
+            .limit(PAGE_SIZE)
+            .then((data) => {
+                return res.json(data);
+            })
+            .catch((err) => {
+                return res.status(500).json("error server");
+            });
+    } else {
+        AccountModel.find({})
+            .then((data) => {
+                return res.json(data);
+            })
+            .catch((err) => {
+                return res.status(500).json("error server");
+            });
+    }
+});
 // POST id
 router.post("/id", (req, res) => {
     const { id } = req.body;
@@ -45,7 +73,7 @@ router.post("/id", (req, res) => {
         .catch((err) => {
             return res.status(500).json("error server");
         });
-})
+});
 
 // POST
 router.post("/register", (req, res, next) => {
@@ -88,25 +116,33 @@ router.put("/:id", (req, res) => {
     const id = req.params.id;
     const newPass = req.body.newPass;
     // validate param
-    AccountModel.findByIdAndUpdate(id, {
-        password: newPass
-    }, {upsert: true}).then(data => {
-        return res.json("update success");
-    }).catch(err  => {
-        console.log(err);
-        return res.status(500).json("error");
-    })
-})
+    AccountModel.findByIdAndUpdate(
+        id,
+        {
+            password: newPass,
+        },
+        { upsert: true }
+    )
+        .then((data) => {
+            return res.json("update success");
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json("error");
+        });
+});
 // DELETE
 router.delete("/:id", (req, res) => {
     const id = req.params.id;
     // validate param
-    AccountModel.findByIdAndDelete(id).then(data => {
-        res.json("delete sucess");
-    }).catch(err => {
-        res.status(500).json("delete error");
-    })
-})
+    AccountModel.findByIdAndDelete(id)
+        .then((data) => {
+            res.json("delete sucess");
+        })
+        .catch((err) => {
+            res.status(500).json("delete error");
+        });
+});
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;

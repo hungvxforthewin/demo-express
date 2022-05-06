@@ -1,8 +1,8 @@
 const express = require("express");
-require('dotenv').config();
+require("dotenv").config();
 const path = require("path");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5100;
 // const apiRouter = require("./routers/apiRouter");
 // const demoRouter = require("./routers/demoRouting");
 const { apiRouter, demoRouter, accountRouter } = require("./routers/index");
@@ -10,10 +10,10 @@ const { apiRouter, demoRouter, accountRouter } = require("./routers/index");
 const { connectDatabase } = require("./config/connectDB");
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Hello World! <3");
 });
 app.get("/hello", (req, res) => {
-    res.send("Hello World!");
+    res.send("Hello World! <3");
 });
 
 // config
@@ -49,6 +49,6 @@ function initUser(req, res, next) {
     next();
 }
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(3000, () => {
+    console.log(`Example app listening on port 3000`);
 });
