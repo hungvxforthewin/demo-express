@@ -18,10 +18,11 @@
     },
     "homepage": "https://github.com/hungvxforthewin/demo-express#readme",
     "dependencies": {
+        "cors": "^2.8.5",
         "dotenv": "^16.0.0",
+        "ejs": "^3.1.7",
         "express": "^4.17.3",
-        "mongoose": "^6.2.8",
         "faker": "^6.6.6",
-        "ejs": "^3.1.7"
+        "mongoose": "^6.2.8"
     }
 }
