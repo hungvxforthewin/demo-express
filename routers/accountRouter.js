@@ -33,6 +33,7 @@ router.get("/:id", (req, res) => {
 });
 // GET PAGING
 // WHY /list/list
+// POST
 router.get("/list/list", (req, res) => {
     const PAGE_SIZE = 1;
     let PAGE = req.query.page;

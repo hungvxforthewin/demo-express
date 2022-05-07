@@ -5,6 +5,8 @@ const AcountSchema = new Schema(
     {
         username: String,
         password: String,
+        avatar: String,
+        description: String
     },
     { collection: "account" }
 );

@@ -5,13 +5,13 @@ const app = express();
 const port = process.env.PORT || 5100;
 // const apiRouter = require("./routers/apiRouter");
 // const demoRouter = require("./routers/demoRouting");
-const { apiRouter, demoRouter, accountRouter } = require("./routers/index");
+const { apiRouter, demoRouter, accountRouter, fakeDataRouter, homeRouter } = require("./routers/index");
 
 const { connectDatabase } = require("./config/connectDB");
 
-app.get("/", (req, res) => {
-    res.send("Hello World! <3");
-});
+// app.get("/", (req, res) => {
+//     res.send("Hello World! <3");
+// });
 app.get("/hello", (req, res) => {
     res.send("Hello World! <3");
 });
@@ -22,7 +22,9 @@ app.use(express.urlencoded({ extended: false })); //post x-www-form-urlencoded
 app.use("/static", express.static("public")); //http://localhost:3000/static/file/test.txt
 app.use(express.static("upload")); //http://localhost:3000/keke.txt
 app.use("/imagefake", express.static(path.join(__dirname, "image/check"))); //absolute path of the directory
-
+// Settings
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 // initial data
 app.use("/request", initUser);
 app.use(initUser);
@@ -31,9 +33,11 @@ connectDatabase();
 
 // router
 console.log("start");
+app.use("/", homeRouter);
 app.use("/api/v1/", apiRouter);
 app.use("/demo-router/", demoRouter);
 app.use("/account/", accountRouter);
+app.use("/mock/", fakeDataRouter);
 
 function initUser(req, res, next) {
     console.log("an request");
