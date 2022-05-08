@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 5100;
 // const apiRouter = require("./routers/apiRouter");
 // const demoRouter = require("./routers/demoRouting");
-const { apiRouter, demoRouter, accountRouter, fakeDataRouter, homeRouter, corsRouter } = require("./routers/index");
+const { apiRouter, demoRouter, accountRouter, fakeDataRouter, homeRouter, corsRouter, demoJwtRouter } = require("./routers/index");
 
 const { connectDatabase } = require("./config/connectDB");
 
@@ -49,6 +49,7 @@ app.use("/demo-router/", demoRouter);
 app.use("/account/", accountRouter);
 app.use("/mock/", fakeDataRouter);
 app.use("/demo-cors/", corsRouter);
+app.use("/demo-jwt/", demoJwtRouter);
 
 function initUser(req, res, next) {
     console.log("an request");

@@ -4,6 +4,7 @@ const accountRouter = require("./accountRouter");
 const fakeDataRouter = require("./fakeDataRouter");
 const homeRouter = require("./homeRouter");
 const corsRouter = require("./corsRouter");
+const demoJwtRouter = require("./demoJwtRouter");
 
 module.exports = {
     demoRouter: demoRouter,
@@ -11,5 +12,6 @@ module.exports = {
     accountRouter: accountRouter,
     fakeDataRouter,
     homeRouter,
-    corsRouter
+    corsRouter,
+    demoJwtRouter
 };
