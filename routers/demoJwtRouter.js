@@ -10,10 +10,12 @@ router.get('/api',(req, res) => {
 });
 
 // Post to Validate the API with jwt token
+// 'Authorization': 'Bearer token'
 router.post('/api/validate',verifyToken,(req, res)=>{
     jwt.verify(req.token,'secretkey',(err,authData)=>{
         if(err){
-            res.sendStatus(403);
+            //res.sendStatus(403);
+            res.status(403).json("not validate");
         }else{
             res.json({
                 message: 'Validated',
@@ -29,7 +31,7 @@ router.post('/api/login',(req, res) => {
         username: 'jk',  
         email: 'jaykrishnareddy@gmail.com'  
     }  
-    jwt.sign({user:user},'secretkey',{expiresIn: '30s'},(err,token)=>{  
+    jwt.sign({user:user},'secretkey',{expiresIn: '60s'},(err,token)=>{  
         res.json({token})  
     })  
 })  
