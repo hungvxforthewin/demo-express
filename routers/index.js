@@ -5,6 +5,7 @@ const fakeDataRouter = require("./fakeDataRouter");
 const homeRouter = require("./homeRouter");
 const corsRouter = require("./corsRouter");
 const demoJwtRouter = require("./demoJwtRouter");
+const demoTokenRouter = require("./demoAccessRefeshTokenRouter");
 
 module.exports = {
     demoRouter: demoRouter,
@@ -13,5 +14,6 @@ module.exports = {
     fakeDataRouter,
     homeRouter,
     corsRouter,
-    demoJwtRouter
+    demoJwtRouter,
+    demoTokenRouter,
 };
