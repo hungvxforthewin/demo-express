@@ -9,6 +9,7 @@ const expressSession = require("express-session");
 const passport = require("passport");
 
 const initAPIs = require("./routers/passportLocalRouter");
+const retailAPIs = require("./routers/behaviorRouter");
 
 // Cho phép các api của ứng dụng xử lý dữ liệu từ body của request
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // Khởi tạo các routes cho ứng dụng
 initAPIs(app);
+retailAPIs(app);
 
 // chọn một port mà bạn muốn và sử dụng để chạy ứng dụng tại local
 const port = 8018;
