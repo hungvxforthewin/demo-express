@@ -38,6 +38,10 @@ const login = (username, password) => {
             return reject({ status: false, mess: "user chưa kích hoạt" });
         }
         const checkPassword = await userByUsername.comparePassword(password);
+        // Method compare
+        // comparePassword(password) {
+        //     return bcrypt.compare(password, this.local.password); // return a promise has result true or false abc@123
+        // }
         if (!checkPassword) {
             return reject({ status: false, mess: "password không đúng" });
         }
