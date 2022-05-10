@@ -4,6 +4,8 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 5100;
+const swaggerUi = require("swagger-ui-express");
+swaggerDocument = require("./swagger.json");
 // const apiRouter = require("./routers/apiRouter");
 // const demoRouter = require("./routers/demoRouting");
 const { apiRouter, demoRouter, accountRouter, fakeDataRouter, homeRouter, corsRouter, demoJwtRouter, demoTokenRouter } = require("./routers/index");
@@ -51,6 +53,7 @@ app.use("/mock/", fakeDataRouter);
 app.use("/demo-cors/", corsRouter);
 app.use("/demo-jwt/", demoJwtRouter);
 app.use("/demo-token/", demoTokenRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 function initUser(req, res, next) {
     console.log("an request");
