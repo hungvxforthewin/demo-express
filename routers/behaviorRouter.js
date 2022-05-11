@@ -139,6 +139,26 @@ const retailAPIs = (app) => {
             });
     });
 
+    // Parallel fetch request
+    app.get("/get-parallel", async (req, res) => {
+        async function fetchMoviesAndCategories() {
+            const [moviesResponse, categoriesResponse] = await Promise.all([fetch("https://jsonplaceholder.typicode.com/todos/1"), fetch("https://jsonplaceholder.typicode.com/todos/2")]);
+            const movies = await moviesResponse.json();
+            const categories = await categoriesResponse.json();
+            return [movies, categories];
+        }
+        fetchMoviesAndCategories()
+            .then(([movies, categories]) => {
+                console.log(movies, categories);
+                //res.json( movies, categories ); //  false because not object
+                //res.json({ movies, categories }); // fetched object
+                res.json([movies, categories]); // fetched array
+            })
+            .catch((error) => {
+                // /movies or /categories request failed
+            });
+    });
+
     return app.use("/", router); //default
     // app.use("/common", importRouter); // đưa luôn vào server.js or export thành function, call và pass app tại server.js
     // return app.use("/retail", router); // not http://localhost:3000/retail/home
