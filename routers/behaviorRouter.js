@@ -129,7 +129,7 @@ const retailAPIs = (app) => {
                 }
             });
         }
-        const testData = fetchMoviesBadStatus2(); //Promise get data (await, then())
+        const testData = fetchMoviesBadStatus2(); //Promise get data (await(try/catch), then())
         testData
             .then((data) => {
                 res.json(data);
