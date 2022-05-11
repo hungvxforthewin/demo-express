@@ -12,8 +12,7 @@ const initAPIs = require("./routers/passportLocalRouter");
 const retailAPIs = require("./routers/behaviorRouter");
 
 // Cho phép các api của ứng dụng xử lý dữ liệu từ body của request
-app.use(express.json());
-
+app.use(express.json())
 // Config session
 app.use(expressSession({ secret: "secret", saveUninitialized: true, resave: true, cookie: { maxAge: 24 * 60 * 60 * 1000, httpOnly: false, secure: false } }));
 // Config passport

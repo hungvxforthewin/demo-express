@@ -46,7 +46,7 @@ const retailAPIs = (app) => {
     // check();
 
     // npm node-fetch
-
+    // GET
     app.get("/get", async (req, res) => {
         // Promise then
         // fetch("https://jsonplaceholder.typicode.com/todos/1")
@@ -60,19 +60,83 @@ const retailAPIs = (app) => {
         // async/await
         const data = await fetch("https://jsonplaceholder.typicode.com/todos/1");
         const result = await data.json();
-        console.log(result);
+        // console.log(result); // Promise ??
         return res.json(result);
     });
 
-    async function fetchMoviesJSON() {
-        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    // async/await function
+    // async function fetchMoviesJSON() {
+    //     const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    //     const movies = await response.json();
+    //     return movies;
+    // }
+    // const testData = fetchMoviesJSON();
+    // console.log(testData);
+    // fetchMoviesJSON().then((movies) => {
+    //     console.log(movies); // fetched movies
+    // });
+
+    app.get("/get-test", async (req, res) => {
+        async function fetchMoviesJSON() {
+            const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+            const movies = await response.json();
+            return movies;
+        }
+        const testData = await fetchMoviesJSON(); //Promise get data (await, then())
+        console.log(testData);
+        return res.json(testData);
+    });
+
+    // HANDLE ERROR
+    app.get("/get-handle-error", async (req, res) => {
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos/aaa");
+        if (!response.ok) {
+            const message = `An error has occured: ${response.status}`;
+            //throw new Error(message);
+            return res.json(message);
+        }
         const movies = await response.json();
-        return movies;
-    }
-    const testData = fetchMoviesJSON();
-    console.log(testData);
-    fetchMoviesJSON().then((movies) => {
-        console.log(movies); // fetched movies
+        return res.json(movies);
+    });
+
+    app.get("/get-handle-error-test", async (req, res) => {
+        async function fetchMoviesBadStatus() {
+            const response = await fetch("https://jsonplaceholder.typicode.com/todos/aaa");
+            if (!response.ok) {
+                const message = `An error has occured: ${response.status}`;
+                //throw new Error(message);
+                //return res.json(message);
+                return Promise.reject(message);
+            } else {
+                const movies = await response.json();
+                return Promise.resolve(movies);
+            }
+        }
+        function fetchMoviesBadStatus2() {
+            // not async
+            return new Promise(async (resolve, reject) => {
+                const response = await fetch("https://jsonplaceholder.typicode.com/todos/aaa");
+                if (!response.ok) {
+                    const message = `An error has occured: ${response.status}`;
+                    //throw new Error(message);
+                    //return res.json(message);
+                    console.log("ERROR");
+                    return reject(message);
+                } else {
+                    const movies = await response.json();
+                    return resolve(movies);
+                }
+            });
+        }
+        const testData = fetchMoviesBadStatus2(); //Promise get data (await, then())
+        testData
+            .then((data) => {
+                res.json(data);
+            })
+            .catch((err) => {
+                console.log("catch!");
+                res.json(err);
+            });
     });
 
     return app.use("/", router); //default
