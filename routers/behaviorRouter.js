@@ -7,6 +7,7 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 const FormData = require("form-data");
+const {getFetch, postFetch} = require("../helpers/handleAPIs.helper");
 
 //const fetch2 = require("fetch")
 // const fetchUrl = require("fetch").fetchUrl;
@@ -216,6 +217,30 @@ const retailAPIs = (app) => {
         //console.log(dataJson);
         res.json(dataJson);
     });
+
+
+    // TEST APIs Helper
+    app.post("/rentail/handle-api", async (req, res) => {
+        try {
+            const url = "https://rentail.shopd7pro.com/api/BangKe/NhapHangSi";
+            const dataPost = {
+                TuNgay: "01/05/2022",
+                DenNgay: "11/05/2022",
+                PageIndex: 1,
+                PageSize: 10,
+                LOC_ID: "ALL",
+                Term: "",
+                VENDOR_ID: "ALL",
+            };
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJREFjY1Nlc3Npb24iOiI1NyIsIlBhc3N3b3JkIjoiQTUxMTQ1REJCNEQyQzhDRTU0RkEzOTNBOUFBRkNBMTAiLCJDb25uZWN0aW9uU3RyaW5nIjoiRGF0YSBTb3VyY2U9MjAyLjkyLjQuMTYxXFxNU1NRTFNFUlZFUjIwMTQsMTQzNDtJbml0aWFsIENhdGFsb2c9ZDdfS0lOUkVOVEFJTDtVc2VyIElkPWQ3cHJvO1Bhc3N3b3JkPWlOM0BUT0NIcFlYTGRTaztNYXggUG9vbCBTaXplPTEwMDA7IENvbm5lY3QgVGltZW91dD03MjAwMDtQb29saW5nPXRydWU7IiwiR2F0ZXdheUtleSI6Ijc1YWEwNTAxMGZjMDcxMzExZTZlYjRiNjRhNzNhMjlmIiwiUmVtZW1iZXIiOiIxIiwiZXhwIjoxNjUyODU2Mjk5fQ.5Y9SBLWd96tC_tHwFXlDpORhMhdWNRokpjeuSnUi7Jg";
+               
+            const data = await postFetch(url, dataPost, token);
+            res.json(data);
+        } catch (error) {
+            res.status(500).json("server error");
+        }
+    });
+
 
     return app.use("/", router); //default
     // app.use("/common", importRouter); // đưa luôn vào server.js or export thành function, call và pass app tại server.js
