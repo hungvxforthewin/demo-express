@@ -6,6 +6,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const FormData = require("form-data");
 
 //const fetch2 = require("fetch")
 // const fetchUrl = require("fetch").fetchUrl;
@@ -157,6 +158,63 @@ const retailAPIs = (app) => {
             .catch((error) => {
                 // /movies or /categories request failed
             });
+    });
+
+    // POST
+    app.post("/retail-login", async (req, res) => {
+        const data = {
+            UserName: "kinretail.test",
+            Password: "KINRetail@test",
+            RememberMe: true,
+        };
+        const result = await fetch("https://rentail.shopd7pro.com/api/Account", {
+            credentials: "same-origin", // 'include', default: 'omit'
+            method: "POST", // 'GET', 'PUT', 'DELETE', etc.
+            body: JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+            headers: {
+                Accept: "application/json, text/plain",
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+        });
+        const dataJson = await result.json();
+        console.log(dataJson);
+        res.json(dataJson);
+    });
+
+    app.post("/rentail/bao-cao-1", async (req, res) => {
+        const data = {
+            TuNgay: "01/05/2022",
+            DenNgay: "11/05/2022",
+            PageIndex: 1,
+            PageSize: 10,
+            LOC_ID: "ALL",
+            Term: "",
+            VENDOR_ID: "ALL",
+        };
+        let formData = new FormData();
+        formData.append("TuNgay", "01/05/2022");
+        formData.append("DenNgay", "11/05/2022");
+        formData.append("PageIndex", "1");
+        formData.append("PageSize", "10");
+        formData.append("LOC_ID", "ALL");
+        formData.append("Term", "");
+        formData.append("VENDOR_ID", "ALL");
+        const result = await fetch("https://rentail.shopd7pro.com/api/BangKe/NhapHangSi", {
+            credentials: "same-origin", // 'include', default: 'omit'
+            method: "POST", // 'GET', 'PUT', 'DELETE', etc.
+            body: formData, // Coordinate the body type with 'Content-Type'
+            headers: {
+                // Accept: "application/json, text/plain",
+                // "Content-Type": "application/json;charset=UTF-8",
+                // "Content-Type": "application/x-www-form-urlencoded",
+                // "Content-Type": "application/form-data",
+                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJREFjY1Nlc3Npb24iOiI1NyIsIlBhc3N3b3JkIjoiQTUxMTQ1REJCNEQyQzhDRTU0RkEzOTNBOUFBRkNBMTAiLCJDb25uZWN0aW9uU3RyaW5nIjoiRGF0YSBTb3VyY2U9MjAyLjkyLjQuMTYxXFxNU1NRTFNFUlZFUjIwMTQsMTQzNDtJbml0aWFsIENhdGFsb2c9ZDdfS0lOUkVOVEFJTDtVc2VyIElkPWQ3cHJvO1Bhc3N3b3JkPWlOM0BUT0NIcFlYTGRTaztNYXggUG9vbCBTaXplPTEwMDA7IENvbm5lY3QgVGltZW91dD03MjAwMDtQb29saW5nPXRydWU7IiwiR2F0ZXdheUtleSI6Ijc1YWEwNTAxMGZjMDcxMzExZTZlYjRiNjRhNzNhMjlmIiwiUmVtZW1iZXIiOiIxIiwiZXhwIjoxNjUyODU2Mjk5fQ.5Y9SBLWd96tC_tHwFXlDpORhMhdWNRokpjeuSnUi7Jg",
+            },
+            "Content-Type": "application/form-data",
+        });
+        const dataJson = await result.json();
+        //console.log(dataJson);
+        res.json(dataJson);
     });
 
     return app.use("/", router); //default
