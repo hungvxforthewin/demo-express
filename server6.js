@@ -10,7 +10,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const { config } = require("./middleware/config");
 const { applyPassportStrategy } = require("./middleware/passport");
-const { userController } = require("./controller");
+const { catController } = require("./controllers/catController");
 
 const passportJwtRouter = require("./routers/passportJwtRouter");
 
