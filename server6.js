@@ -9,10 +9,11 @@ const cors = require("cors");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const { config } = require("./middleware/config");
-const { applyPassportStrategy } = require("./middleware/passport");
+const { applyPassportStrategy } = require("./middleware/PassportJwtMiddleware");
 const { catController } = require("./controllers/catController");
 
 const passportJwtRouter = require("./routers/passportJwtRouter");
+const { connectDatabase } = require("./config/connectDB");
 
 const app = express();
 // Set up CORS
@@ -36,7 +37,9 @@ passportJwtRouter(app);
 /**
  * Get port from environment and store in Express.
  */
-const { port, mongoDBUri, mongoHostName } = config.env;
+const { port } = config.env;
+// connect database
+connectDatabase();
 app.listen(port, () => {
     logger.info(`Started successfully server at port ${port}`);
     // mongoose.connect(mongoDBUri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {

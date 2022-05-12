@@ -1,7 +1,7 @@
 const { Strategy, ExtractJwt } = require("passport-jwt");
 const { config, underscoreId } = require("./config");
-const { User } = require("../database/models");
-export const applyPassportStrategy = (passport) => {
+const { User } = require("../models/accountModel");
+exports.applyPassportStrategy = (passport) => {
     const options = {};
     options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
     options.secretOrKey = config.passport.secret;
