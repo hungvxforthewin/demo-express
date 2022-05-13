@@ -73,12 +73,15 @@ const loginCatController = async (req, res) => {
     } else {
         try {
             const { email, password } = req.body;
-            if (email === "hungvx@gmail.com" && password === "123456") {
+            console.log(req.body);
+            if (email === "hungvx@gmail.com" && password === "12345678") {
                 const oldUser = createUser(email, password);
                 const token = jwt.sign({ email }, config.passport.secret, {
                     expiresIn: 1000000,
                 });
-                const userToReturn = { ...oldUser.toJSON(), ...{ token } };
+                // const userToReturn = { ...oldUser.toJSON(), ...{ token } };
+                const textJSON = JSON.stringify(oldUser);
+                const userToReturn = { ...oldUser, ...{ token } };
                 delete userToReturn.hashedPassword;
                 res.status(200).json(userToReturn);
             } else {
@@ -102,6 +105,7 @@ const loginCatController = async (req, res) => {
             //     generateServerErrorCode(res, 404, "login email error", USER_DOES_NOT_EXIST, "email");
             // }
         } catch (e) {
+            console.log(e);
             generateServerErrorCode(res, 500, e, SOME_THING_WENT_WRONG);
         }
     }

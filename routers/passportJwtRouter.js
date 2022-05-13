@@ -8,6 +8,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const catController = require("../controllers/catController");
+const jwt = require("jsonwebtoken");
 const { generateHashedPassword, generateServerErrorCode, registerValidation, loginValidation } = require("../helpers/utils");
 
 /**
@@ -18,7 +19,9 @@ let initAPIs = (app) => {
     app.get("/home", function (req, res) {
         res.json({ mess: "login from passport-jwt" });
     });
-
+    app.get("/admin", passport.authenticate("jwt", { session: false }), function (req, res) {
+        res.json({ mess: "from wazza with love <3" });
+    });
     app.post("/login", loginValidation, catController.loginCatController);
 
     return app.use("/", router);

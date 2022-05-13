@@ -21,7 +21,8 @@ app.use(cors());
 // Apply strategy to passport
 applyPassportStrategy(passport);
 // Cho phép các api của ứng dụng xử lý dữ liệu từ body của request, form submit
-app.use(express.json());
+app.use(express.json()); //post raw json (application/json)
+app.use(express.urlencoded({ extended: false })); //post x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
 
