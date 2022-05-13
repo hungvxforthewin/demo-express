@@ -1,8 +1,8 @@
 const sha256 = require("sha256");
 const { check } = require("express-validator");
 const { PASSWORD_IS_EMPTY, PASSWORD_LENGTH_MUST_BE_MORE_THAN_8, EMAIL_IS_EMPTY, EMAIL_IS_IN_WRONG_FORMAT } = require("./constant");
-export const generateHashedPassword = (password) => sha256(password);
-export function generateServerErrorCode(res, code, fullError, msg, location = "server") {
+exports.generateHashedPassword = (password) => sha256(password);
+exports.generateServerErrorCode = function (res, code, fullError, msg, location = "server") {
     const errors = {};
     errors[location] = {
         fullError,
@@ -13,7 +13,7 @@ export function generateServerErrorCode(res, code, fullError, msg, location = "s
         fullError,
         errors,
     });
-}
+};
 // ================================
 // Validation:
 // Handle all validation check for the server

@@ -39,7 +39,7 @@ passportJwtRouter(app);
  */
 const { port } = config.env;
 // connect database
-connectDatabase();
+// connectDatabase(); mock data
 app.listen(port, () => {
     logger.info(`Started successfully server at port ${port}`);
     // mongoose.connect(mongoDBUri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
