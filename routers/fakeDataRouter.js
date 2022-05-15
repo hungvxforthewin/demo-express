@@ -4,6 +4,7 @@ const router = express.Router();
 const accountModel = require("../models/accountModel");
 
 // fake data
+// có thể sử dụng faker lib faker, or hard data then for
 router.get("/fakeData", async (req, res, next) => {
     for(let i = 0; i < 96; i++) {
         const newprd = new accountModel();
