@@ -13,11 +13,11 @@
 # paging server without js, with js
 
 
-
+# babel
 # hash password bcrypt
 # dotenv, config secret...
-# Prettier, ESlint
-# Husky, Lint-Staged, CommitLint
+# Prettier, ESlint(auto save, event commit)
+# Husky, Lint-Staged(status staged), CommitLint
 # Restful APIs
 # Swagger, Postman: GET, POST, PUT, DELETE
 # Handle/behavior/invoke APIs (fetch api, handle error, parallel api)
