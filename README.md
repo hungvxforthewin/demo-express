@@ -6,9 +6,11 @@
 # config server.js
 # mock data
 # hard code config
-# ejs
-# paging server without js, with js
+# ejs(view_engine), layout
 # client ajax(get, post)
+# method basic ORM with mongodb (mongoose...)
+# CRUD
+# paging server without js, with js
 
 
 
@@ -17,7 +19,7 @@
 # Prettier, ESlint
 # Husky, Lint-Staged, CommitLint
 # Restful APIs
-# Swagger
+# Swagger, Postman: GET, POST, PUT, DELETE
 # Handle/behavior/invoke APIs (fetch api, handle error, parallel api)
 # Cors (Cross-Origin resource sharing)
 # Authentication & Authorization: Jwt(accessToken, refreshToken) - for APIs, session - for Site
