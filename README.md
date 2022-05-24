@@ -9,8 +9,10 @@
 # ejs(view_engine), layout
 # client ajax(get, post)
 # method basic ORM with mongodb (mongoose...)
-# CRUD
+# CRUD, search
+# handle error
 # paging server without js, with js
+# Authentication & Authorization
 
 
 # babel
@@ -25,3 +27,4 @@
 # Authentication & Authorization: Jwt(accessToken, refreshToken) - for APIs, session - for Site
 # Passport(+session)
 # Passport With JWT
+# GraphQL APIs
