@@ -28,3 +28,6 @@
 # Passport(+session)
 # Passport With JWT
 # GraphQL APIs
+# Docker (images, container, docker-compose)
+# Heroku deploy
+
