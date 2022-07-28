@@ -1,7 +1,7 @@
 # demo-express(basic)
 # router(2 cách viêt), controller, service, model, middleware
 # static file
-# connect database
+# connect database(Mysql, mongodb)
 # req, res, async
 # config server.js
 # mock data
@@ -28,6 +28,7 @@
 # Passport(+session)
 # Passport With JWT
 # GraphQL APIs
+# Working with excel, file
 # Docker (images, container, docker-compose)
 # Heroku deploy
-
+# Server linux, VPS
