@@ -29,6 +29,7 @@
 # Passport With JWT
 # GraphQL APIs
 # Working with excel, file
+# Upload file
 # Docker (images, container, docker-compose)
 # Heroku deploy
 # Server linux, VPS
