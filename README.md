@@ -23,6 +23,7 @@
 # Restful APIs
 # Swagger, Postman: GET, POST, PUT, DELETE
 # Handle/behavior/invoke APIs (fetch api, handle error, parallel api)
+# Validator, handle result(status code, mess)
 # Cors (Cross-Origin resource sharing)
 # Authentication & Authorization: Jwt(accessToken, refreshToken) - for APIs, session - for Site
 # Passport(+session)
